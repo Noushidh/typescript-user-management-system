@@ -18,3 +18,19 @@ npm install
 
 ## Run
 npm run dev
+
+
+
+
+Overall Flow
+HTTP Request
+   ↓
+Controller
+   ↓
+Use Case (Service)
+   ↓
+IUserRepository (interface in Domain)
+   ↓
+UserRepository (implementation in Infrastructure)
+   ↓
+Database (PostgreSQL)

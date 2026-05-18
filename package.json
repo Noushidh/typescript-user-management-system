@@ -1,1 +1,1 @@
-{"scripts":{"dev":"ts-node server.ts"},"devDependencies":{"@types/ejs":"^3.1.5","@types/express":"^5.0.6","@types/node":"^24.12.4","ts-node":"^10.9.2","typescript":"^6.0.3"},"dependencies":{"dotenv":"^17.4.2","ejs":"^5.0.2","express":"^5.2.1"}}
+{"scripts":{"dev":"ts-node server.ts"},"devDependencies":{"@types/ejs":"^3.1.5","@types/express":"^5.0.6","@types/node":"^24.12.4","@types/pg":"^8.20.0","ts-node":"^10.9.2","typescript":"^6.0.3"},"dependencies":{"dotenv":"^17.4.2","ejs":"^5.0.2","express":"^5.2.1","pg":"^8.20.0"}}
