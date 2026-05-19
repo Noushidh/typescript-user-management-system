@@ -1,5 +1,6 @@
 import {IAdminRepository} from '../../admin/domain/IAdminRepository'
 import { Admin } from '../domain/entities/Admin'
+import { User } from '../../users/domain/entities/User';
 
 export class LoginAdminUseCase {
   constructor(private adminRepository: IAdminRepository) {}
@@ -27,3 +28,25 @@ export class LoginAdminUseCase {
     return existingAdmin;
   }
 }
+
+export class CountUsersUseCase {
+  constructor(private adminRepository:IAdminRepository){}
+  public async execute():Promise<number>{
+    return await this.adminRepository.countUser();
+  }
+}
+export class getAllUserUseCase{
+    constructor(private adminRepository:IAdminRepository){}
+    public async execute():Promise<User[]>{
+        return await this.adminRepository.getallusers();
+    }
+}
+export class toggleUserBlockUsecase{
+     constructor(private adminRepository:IAdminRepository){}
+     public async execute(userId:number):Promise<void>{
+        if(!userId){
+           throw new Error('Invalid user id');
+        }
+        await this.adminRepository.toggleUserBlock(userId);
+     }
+  }    
