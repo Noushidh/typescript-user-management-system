@@ -1,36 +1,85 @@
-# TypeScript User Management System
+# User Authentication System
 
-A TypeScript project demonstrating OOP principles and user management features.
+A robust authentication system built with TypeScript, Node.js, Express, PostgreSQL, and EJS. This project is designed using **Clean Architecture**, **Object-Oriented Programming (OOP)** principles, **SOLID principles**, and the **Repository Pattern** to create a scalable and maintainable codebase.
 
-## Features
-- Create users
-- Update users
-- Delete users
-- Role-based access control
-- Password hashing
+---
 
-## Technologies
+## 🚀 Features
+
+### User Module
+- User registration
+- User login
+- User logout
+- Session-based authentication
+- Password hashing with bcrypt
+- Protected home page
+- Prevent access to login/register pages after authentication
+- Browser back-button protection after logout
+
+### Admin Module
+- Admin login and logout
+- View all users
+- Block and unblock users
+- Automatically log out blocked users
+
+---
+
+## 🛠️ Technologies Used
+
 - TypeScript
 - Node.js
+- Express.js
+- PostgreSQL
+- EJS
+- express-session
+- bcrypt
+- dotenv
 
-## Installation
-npm install
+---
 
-## Run
-npm run dev
+## 🏗️ Architectural Patterns Used
 
+### Clean Architecture
+The application is divided into layers with clear responsibilities:
 
+- **Presentation Layer** – Routes, Controllers, Views
+- **Application Layer** – Use Cases (Business Logic)
+- **Domain Layer** – Interfaces and Entities
+- **Infrastructure Layer** – Repository Implementations and Database Access
 
+### Repository Pattern
+Database access is abstracted through interfaces. Use cases depend on abstractions instead of concrete implementations.
 
-Overall Flow
+### Dependency Injection
+Repositories are injected into use cases, making the code loosely coupled and easy to test.
+
+### SOLID Principles
+The project follows all five SOLID principles to keep the code maintainable and extensible.
+
+### Object-Oriented Programming (OOP)
+Uses:
+- Classes
+- Objects
+- Encapsulation
+- Abstraction
+- Inheritance (where needed)
+- Polymorphism (through interfaces)
+
+---
+
+## 🔄 Application Flow
+
+```text
 HTTP Request
+   ↓
+Routes
    ↓
 Controller
    ↓
-Use Case (Service)
+Use Case (Business Logic)
    ↓
-IUserRepository (interface in Domain)
+Repository Interface (Domain Layer)
    ↓
-UserRepository (implementation in Infrastructure)
+Repository Implementation (Infrastructure Layer)
    ↓
-Database (PostgreSQL)
+PostgreSQL Database
