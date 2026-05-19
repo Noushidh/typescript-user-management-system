@@ -52,7 +52,7 @@ class userLoginCheckController {
         req.session.user = {
           id:user.id,
           name:user.name,
-          email:user.email
+          email:user.email,
         }
          res.status(200).json({success:true,message:'Login successful'})
       }catch(error:any){
@@ -65,6 +65,12 @@ class userLoginCheckController {
     res.redirect('/login');
     return;
   }
+  const user = await userRepository.findbyEmail(req.session.user.email)
+  if(user.is_blocked){
+    req.session.destroy(()=>{});
+    res.redirect('/login')
+    return;
+  }
   res.setHeader('Cache-Control','no-store, no-cache, must-revalidate, private');
   res.render('users/presentation/views/user_home',{user:req.session.user})
 }
@@ -75,7 +81,7 @@ class UserLogoutController {
   public logoutUser = async (req: Request,res: Response): Promise<void> => {
     req.session.destroy((error) => {
       if (error) {
-        res.status(500).json({success: false,message: 'Logout failed',});
+        res.status(500).json({success: false,message: 'Logout failed'});
         return;
       }
       res.clearCookie('connect.sid');

@@ -38,6 +38,9 @@ export class CheckCredentialsUseCase {
         if(!ispasswordValid){
             throw new Error('Invalid email or password')
         }
+        if(existingUser.is_blocked){
+            throw new Error('Your account has been blocked by admin');
+        }
         return existingUser
     }
 }

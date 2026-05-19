@@ -92,13 +92,7 @@
 <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 
 <script>
-  const notyf = new Notyf({
-    duration: 3000,
-    position: {
-      x: 'right',
-      y: 'top'
-    }
-  });
+  const notyf = new Notyf({duration: 3000,position: {x: 'right',y: 'top'}});
 
   const form = document.querySelector('form');
 
@@ -124,7 +118,7 @@
       notyf.success(response.data.message || 'Login successful');
 
       setTimeout(() => {
-        window.location.href = '/Home';
+        window.location.href = '/home';
       }, 1500);
     } catch (error) {
       const message =

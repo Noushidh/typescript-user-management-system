@@ -10,6 +10,10 @@ const toggleuserBlockUsecase = new toggleUserBlockUsecase(adminRepository)
 
 class AdminDashboardPageLoadController {
     public async load_login_page (req:Request,res:Response):Promise<void>{
+        if(!req.session.admin){
+            res.redirect('/admin/login')
+            return;
+        }
         const totalUsers = await countUsersUseCase.execute();
         const users = await getallUserUseCase.execute();
         res.render('admin/presentation/views/admin_dashboard',{admin:req.session.admin,totalUsers,users})

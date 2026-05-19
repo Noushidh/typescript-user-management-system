@@ -27,7 +27,9 @@ export default app;
 
 app.use('/',userROutes);
 app.use('/admin',adminRoutes)
-
+app.get('/',(req,res)=>{
+  res.redirect('/login')
+})
 const port = Number(process.env.PORT);
 
 async function startServer() {
