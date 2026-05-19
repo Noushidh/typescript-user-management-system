@@ -1,9 +1,9 @@
-
 import dotenv from 'dotenv';
 dotenv.config();
 
 import express from 'express'
 import path from 'path';
+import session from 'express-session';
 import userROutes from './src/modules/users/presentation/routes'
 import {connectDatabase} from './src/modules/infrastructure/database/db'
 
@@ -11,6 +11,14 @@ const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use(
+  session({
+    secret: 'my-secret-key',
+    resave: false,
+    saveUninitialized: false
+  })
+);
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname,'src','modules'));

@@ -85,3 +85,61 @@
 
 </body>
 </html>
+<!-- Add before </body> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+
+<script>
+  const notyf = new Notyf({
+    duration: 3000,
+    position: {
+      x: 'right',
+      y: 'top'
+    }
+  });
+
+  const form = document.querySelector('form');
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+
+    // Name validation
+    if (name.length < 3) {
+      notyf.error('Name must be at least 3 characters long.');
+      return;
+    }
+
+    // Email validation
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      notyf.error('Please enter a valid email address.');
+      return;
+    }
+
+    // Password validation
+    if (password.length < 6) {
+      notyf.error('Password must be at least 6 characters long.');
+      return;
+    }
+
+    try {
+      const response = await axios.post('/register', {name,email,password});
+
+      notyf.success(response.data.message);
+
+      setTimeout(() => {
+        window.location.href = '/login';
+      }, 2000);
+    } catch (error) {
+      const message =
+        error.response?.data?.message || 'Something went wrong';
+
+      notyf.error(message);
+    }
+  });
+</script>

@@ -63,33 +63,15 @@
                 />
               </div>
 
-              <!-- Remember Me -->
-              <div class="form-check mb-3">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  id="remember"
-                  name="remember"
-                />
-                <label class="form-check-label" for="remember">
-                  Remember me
-                </label>
-              </div>
-
               <!-- Submit Button -->
               <button type="submit" class="btn btn-primary w-100">
                 Login
               </button>
             </form>
 
-            <!-- Links -->
-            <div class="text-center mt-3">
-              <a href="/users/forgot-password">Forgot Password?</a>
-            </div>
-
             <div class="text-center mt-2">
               <span>Don't have an account?</span>
-              <a href="/users/register">Register</a>
+              <a href="/register">Register</a>
             </div>
 
           </div>
@@ -100,3 +82,55 @@
 
 </body>
 </html>
+<!-- Notyf CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+
+<!-- Axios -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<!-- Notyf JS -->
+<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+
+<script>
+  const notyf = new Notyf({
+    duration: 3000,
+    position: {
+      x: 'right',
+      y: 'top'
+    }
+  });
+
+  const form = document.querySelector('form');
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+
+    if (!email) {
+      notyf.error('Email is required.');
+      return;
+    }
+
+    if (!password) {
+      notyf.error('Password is required.');
+      return;
+    }
+
+    try {
+      const response = await axios.post('/login', {email,password});
+
+      notyf.success(response.data.message || 'Login successful');
+
+      setTimeout(() => {
+        window.location.href = '/Home';
+      }, 1500);
+    } catch (error) {
+      const message =
+        error.response?.data?.message || 'Invalid email or password';
+
+      notyf.error(message);
+    }
+  });
+</script>
