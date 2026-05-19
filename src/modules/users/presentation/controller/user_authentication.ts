@@ -3,7 +3,7 @@
 import { Request,Response } from "express"
 import {RegisterUserUseCase,CheckCredentialsUseCase} from '../../application/use-cases/user-authentication.usecase'
 import {UserRepository} from '../../infrastructure/UserRepository';
-import { error } from "console";
+
 const userRepository = new UserRepository();
 const registerUserUseCase = new RegisterUserUseCase(userRepository);
 const checkCredentialsUseCase =new CheckCredentialsUseCase(userRepository);
